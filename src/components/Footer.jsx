@@ -1,15 +1,17 @@
 const Footer = () => {
   return (
     <footer style={{
-      background: "#111",
-      padding: "30px",
-      textAlign: "center",
-      marginTop: "50px",
-      borderTop: "1px solid #333"
-    }}>
-      <p>Tienda Deportiva © 2026</p>
-      <p>Contacto: tuemail@gmail.com</p>
-    </footer>
+  textAlign: "center",
+  padding: "30px",
+  borderTop: "1px solid #222",
+  marginTop: "40px",
+  color: "#aaa"
+}}>
+  <p>BALANCE © 2026</p>
+  <p style={{ fontSize: "14px" }}>
+    Ropa deportiva y accesorios
+  </p>
+</footer>
   );
 };
 

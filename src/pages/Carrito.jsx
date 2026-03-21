@@ -25,7 +25,7 @@ const Carrito = () => {
     )
     .join("\n\n");
 
-  const texto = `Hola! 👋\n\nQuiero hacer el siguiente pedido:\n\n${items}\n\n💰 Total: $${total}\n\n📍 Zona de entrega:\n💳 Forma de pago:\n\nGracias!`;
+  const texto = `Hola! 👋\n\nQuiero hacer el siguiente pedido:\n\n${items}\n\n💰 Total: $${total}\n\nGracias!`;
 
   const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
 

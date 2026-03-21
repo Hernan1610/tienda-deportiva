@@ -6,9 +6,14 @@ const Home = () => {
 
       {/* 🔥 HERO */}
       <section style={heroStyle}>
-        <h1 style={titleStyle}>
-          Entrená con estilo
-        </h1>
+        <h1 style={{
+  fontSize: "clamp(28px, 6vw, 60px)",
+  textAlign: "center",
+  marginBottom: "10px",
+  lineHeight: "1.1"
+}}>
+  Entrená con estilo
+</h1>
 
         <p style={subtitleStyle}>
           Ropa deportiva y accesorios para tu día a día

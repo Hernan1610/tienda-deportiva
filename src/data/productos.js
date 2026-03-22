@@ -7,7 +7,8 @@ export const productos = [
     categoria: "ropa",
 
     talles: ["S", "M", "L"],
-    stock: 5
+    stock: 5,
+    badge: "Nuevo"
   },
   {
     id: 2,

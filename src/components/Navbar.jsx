@@ -40,39 +40,43 @@ const navStyle = {
   position: "sticky",
   top: 0,
   zIndex: 1000,
-  background: "#0a0a0a",
-  padding: "5px 20px", // 🔥 menos padding vertical
+  background: "rgba(255,255,255,0.7)",
+  backdropFilter: "blur(12px)",
+  padding: "10px 30px",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  borderBottom: "1px solid #222"
+  borderBottom: "1px solid rgba(0,0,0,0.05)"
 };
 
 const logoStyle = {
-  height: "70px",
+  height: "60px",
   objectFit: "contain"
 };
 
 const linksContainer = {
   display: "flex",
-  gap: "15px",
-  alignItems: "center",
-  flexWrap: "wrap"
+  gap: "20px",
+  alignItems: "center"
 };
 
 const linkStyle = {
   textDecoration: "none",
-  color: "#fff",
+  color: "var(--text)",
   fontWeight: "500",
-  fontSize: "14px"
+  fontSize: "14px",
+  opacity: 0.8,
+  transition: "0.2s"
 };
 
 const cartStyle = {
-  background: "#25D366",
-  padding: "6px 12px",
-  borderRadius: "12px",
+  background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
+  padding: "6px 14px",
+  borderRadius: "20px",
   color: "#fff",
-  fontWeight: "bold"
+  fontWeight: "600",
+  fontSize: "13px",
+  boxShadow: "0 4px 12px rgba(180,120,255,0.3)"
 };
 
 export default Navbar;

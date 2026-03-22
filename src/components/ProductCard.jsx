@@ -6,10 +6,8 @@ const ProductCard = ({ producto }) => {
   const { agregarAlCarrito } = useContext(CartContext);
   const [talleSeleccionado, setTalleSeleccionado] = useState("");
 
-  // 🔥 MODO ADMIN
   const esAdmin = localStorage.getItem("admin") === "true";
 
-  // 🔥 STOCK DINÁMICO
   const stockGuardado =
     JSON.parse(localStorage.getItem("stock")) || {};
 
@@ -23,18 +21,42 @@ const ProductCard = ({ producto }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: "#111",
+        position: "relative", // 🔥 IMPORTANTE (para badge)
+        background: "#fff",
         borderRadius: "20px",
         overflow: "hidden",
         transition: "0.3s",
-        transform: hover ? "translateY(-8px)" : "none",
+        transform: hover ? "translateY(-6px)" : "none",
         boxShadow: hover
-          ? "0 15px 40px rgba(0,0,0,0.6)"
-          : "0 5px 15px rgba(0,0,0,0.3)"
+          ? "0 20px 50px rgba(0,0,0,0.12)"
+          : "0 8px 25px rgba(0,0,0,0.05)",
+        border: "1px solid #eee"
       }}
     >
+      {/* 🔥 BADGE */}
+      {producto.badge && (
+        <span
+          style={{
+            position: "absolute",
+            top: "12px",
+            left: "12px",
+            background:
+              "linear-gradient(135deg, #d4a5ff, #b57bff)",
+            color: "#fff",
+            padding: "6px 12px",
+            borderRadius: "20px",
+            fontSize: "11px",
+            fontWeight: "600",
+            zIndex: 2,
+            boxShadow: "0 5px 15px rgba(0,0,0,0.1)"
+          }}
+        >
+          {producto.badge}
+        </span>
+      )}
+
       {/* 📸 IMAGEN */}
-      <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden", background: "#f8f8f8" }}>
         <img
           src={producto.imagen}
           alt={producto.nombre}
@@ -42,7 +64,6 @@ const ProductCard = ({ producto }) => {
             width: "100%",
             height: "220px",
             objectFit: "contain",
-            background: "#fff",
             transition: "0.4s",
             transform: hover ? "scale(1.05)" : "scale(1)"
           }}
@@ -50,30 +71,51 @@ const ProductCard = ({ producto }) => {
       </div>
 
       {/* 📦 INFO */}
-      <div style={{ padding: "15px" }}>
-        <h3 style={{ fontSize: "1rem", marginBottom: "5px" }}>
+      <div style={{ padding: "18px" }}>
+        <h3
+          style={{
+            fontSize: "1rem",
+            marginBottom: "6px",
+            color: "#1a1a1a",
+            fontWeight: "500"
+          }}
+        >
           {producto.nombre}
         </h3>
 
-        <p style={{ fontWeight: "bold", marginBottom: "10px" }}>
-          ${producto.precio}
+        {/* 💰 PRECIO PRO */}
+        <p
+          style={{
+            fontWeight: "600",
+            marginBottom: "12px",
+            color: "#b57bff",
+            fontSize: "15px"
+          }}
+        >
+          ${producto.precio.toLocaleString()}
         </p>
 
         {/* 👕 TALLES */}
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "12px" }}>
           {producto.talles.map((talle) => (
             <button
               key={talle}
               onClick={() => setTalleSeleccionado(talle)}
               style={{
-                margin: "5px",
-                padding: "5px 10px",
-                borderRadius: "10px",
-                border: "1px solid #fff",
+                margin: "4px",
+                padding: "6px 12px",
+                borderRadius: "20px",
+                border: "1px solid #ddd",
                 background:
-                  talleSeleccionado === talle ? "#25D366" : "transparent",
-                color: "#fff",
-                cursor: "pointer"
+                  talleSeleccionado === talle
+                    ? "var(--accent)"
+                    : "#fff",
+                color:
+                  talleSeleccionado === talle
+                    ? "#fff"
+                    : "#333",
+                cursor: "pointer",
+                fontSize: "12px"
               }}
             >
               {talle}
@@ -82,7 +124,12 @@ const ProductCard = ({ producto }) => {
         </div>
 
         {/* 🔥 STOCK */}
-        <p style={{ fontSize: "12px", opacity: 0.7 }}>
+        <p
+          style={{
+            fontSize: "12px",
+            color: "#888"
+          }}
+        >
           {sinStock ? "Sin stock" : `Stock: ${stockActual}`}
         </p>
 
@@ -102,24 +149,27 @@ const ProductCard = ({ producto }) => {
           }}
           style={{
             width: "100%",
-            padding: "10px",
-            borderRadius: "12px",
+            padding: "12px",
+            borderRadius: "25px",
             border: "none",
-            background: sinStock ? "#555" : "#25D366",
+            background: sinStock
+              ? "#ccc"
+              : "linear-gradient(135deg, #d4a5ff, #b57bff)",
             color: "#fff",
-            fontWeight: "bold",
+            fontWeight: "600",
             cursor: sinStock ? "not-allowed" : "pointer",
-            marginTop: "10px"
+            marginTop: "12px",
+            boxShadow:
+              "0 10px 25px rgba(180,120,255,0.3)"
           }}
         >
           {sinStock ? "Sin stock" : "Agregar al carrito"}
         </button>
 
-        {/* 🔥 EDITAR STOCK SOLO ADMIN */}
+        {/* 🔧 ADMIN */}
         {esAdmin && (
           <input
             type="number"
-            placeholder="Editar stock"
             defaultValue={stockActual}
             onChange={(e) => {
               const nuevoStock = Number(e.target.value);
@@ -137,9 +187,9 @@ const ProductCard = ({ producto }) => {
             style={{
               marginTop: "10px",
               width: "100%",
-              padding: "5px",
+              padding: "6px",
               borderRadius: "8px",
-              border: "none"
+              border: "1px solid #ddd"
             }}
           />
         )}

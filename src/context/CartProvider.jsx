@@ -10,7 +10,9 @@ export const CartProvider = ({ children }) => {
 
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
-      const existe = prev.find((p) => p.id === producto.id);
+      const existe = prev.find(
+  (p) => p.id === producto.id && p.talle === producto.talle
+);
 
       if (existe) {
         return prev.map((p) =>

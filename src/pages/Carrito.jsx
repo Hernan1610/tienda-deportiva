@@ -20,9 +20,9 @@ const Carrito = () => {
 
   const items = carrito
     .map(
-      (p) =>
-        `🛍 ${p.nombre}\nCantidad: ${p.cantidad}\nSubtotal: $${p.precio * (p.cantidad || 1)}`
-    )
+  (p) =>
+    `🛍️ ${p.nombre} (Talle: ${p.talle})\nCantidad: ${p.cantidad}\nSubtotal: $${p.precio * (p.cantidad || 1)}`
+)
     .join("\n\n");
 
   const texto = `Hola! 👋\n\nQuiero hacer el siguiente pedido:\n\n${items}\n\n💰 Total: $${total}\n\nGracias!`;
@@ -83,15 +83,21 @@ const Carrito = () => {
                 }}
               />
 
-              {/* info */}
-              <div>
-                <h3>{p.nombre}</h3>
-                <p style={{ opacity: 0.7 }}>${p.precio}</p>
-                <p style={{ fontWeight: "bold" }}>
-                  Subtotal: ${p.precio * (p.cantidad || 1)}
-                </p>
-              </div>
+             {/* info */}
+<div>
+  <h3>{p.nombre}</h3>
 
+  {/* 👕 TALLE */}
+  <p style={{ fontSize: "14px", opacity: 0.7 }}>
+    Talle: {p.talle}
+  </p>
+
+  <p style={{ opacity: 0.7 }}>${p.precio}</p>
+
+  <p style={{ fontWeight: "bold" }}>
+    Subtotal: ${p.precio * (p.cantidad || 1)}
+  </p>
+</div>
               {/* controles */}
               <div
                 style={{

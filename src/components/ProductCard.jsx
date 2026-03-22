@@ -4,6 +4,19 @@ import CartContext from "../context/CartContext";
 const ProductCard = ({ producto }) => {
   const [hover, setHover] = useState(false);
   const { agregarAlCarrito } = useContext(CartContext);
+  const [talleSeleccionado, setTalleSeleccionado] = useState("");
+
+  // 🔥 MODO ADMIN
+  const esAdmin = localStorage.getItem("admin") === "true";
+
+  // 🔥 STOCK DINÁMICO
+  const stockGuardado =
+    JSON.parse(localStorage.getItem("stock")) || {};
+
+  const stockActual =
+    stockGuardado[producto.id] ?? producto.stock;
+
+  const sinStock = stockActual === 0;
 
   return (
     <div
@@ -37,37 +50,98 @@ const ProductCard = ({ producto }) => {
 
       {/* 📦 INFO */}
       <div style={{ padding: "15px" }}>
-        <h3 style={{
-          fontSize: "1rem",
-          marginBottom: "5px"
-        }}>
+        <h3 style={{ fontSize: "1rem", marginBottom: "5px" }}>
           {producto.nombre}
         </h3>
 
-        <p style={{
-          fontWeight: "bold",
-          marginBottom: "10px"
-        }}>
+        <p style={{ fontWeight: "bold", marginBottom: "10px" }}>
           ${producto.precio}
+        </p>
+
+        {/* 👕 TALLES */}
+        <div style={{ marginBottom: "10px" }}>
+          {producto.talles.map((talle) => (
+            <button
+              key={talle}
+              onClick={() => setTalleSeleccionado(talle)}
+              style={{
+                margin: "5px",
+                padding: "5px 10px",
+                borderRadius: "10px",
+                border: "1px solid #fff",
+                background:
+                  talleSeleccionado === talle ? "#25D366" : "transparent",
+                color: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              {talle}
+            </button>
+          ))}
+        </div>
+
+        {/* 🔥 STOCK */}
+        <p style={{ fontSize: "12px", opacity: 0.7 }}>
+          {sinStock ? "Sin stock" : `Stock: ${stockActual}`}
         </p>
 
         {/* 🛒 BOTÓN */}
         <button
-          onClick={() => agregarAlCarrito(producto)}
+          disabled={sinStock}
+          onClick={() => {
+            if (!talleSeleccionado) {
+              alert("Seleccioná un talle");
+              return;
+            }
+
+            agregarAlCarrito({
+              ...producto,
+              talle: talleSeleccionado
+            });
+          }}
           style={{
             width: "100%",
             padding: "10px",
             borderRadius: "12px",
             border: "none",
-            background: "#25D366",
+            background: sinStock ? "#555" : "#25D366",
             color: "#fff",
             fontWeight: "bold",
-            cursor: "pointer",
-            transition: "0.3s"
+            cursor: sinStock ? "not-allowed" : "pointer",
+            marginTop: "10px"
           }}
         >
-          Agregar al carrito
+          {sinStock ? "Sin stock" : "Agregar al carrito"}
         </button>
+
+        {/* 🔥 EDITAR STOCK SOLO ADMIN */}
+        {esAdmin && (
+          <input
+            type="number"
+            placeholder="Editar stock"
+            defaultValue={stockActual}
+            onChange={(e) => {
+              const nuevoStock = Number(e.target.value);
+
+              const stockGuardado =
+                JSON.parse(localStorage.getItem("stock")) || {};
+
+              stockGuardado[producto.id] = nuevoStock;
+
+              localStorage.setItem(
+                "stock",
+                JSON.stringify(stockGuardado)
+              );
+            }}
+            style={{
+              marginTop: "10px",
+              width: "100%",
+              padding: "5px",
+              borderRadius: "8px",
+              border: "none"
+            }}
+          />
+        )}
       </div>
     </div>
   );

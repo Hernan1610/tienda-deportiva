@@ -41,9 +41,10 @@ const ProductCard = ({ producto }) => {
           style={{
             width: "100%",
             height: "220px",
-            objectFit: "cover",
+            objectFit: "contain",
+            background: "#fff",
             transition: "0.4s",
-            transform: hover ? "scale(1.08)" : "scale(1)"
+            transform: hover ? "scale(1.05)" : "scale(1)"
           }}
         />
       </div>

@@ -13,7 +13,7 @@ export const productos = [
     id: 2,
     nombre: "Medias",
     precio: 5000,
-    imagen: "...",
+    imagen: "/media.png",
     categoria: "medias",
 
     talles: ["Único"],

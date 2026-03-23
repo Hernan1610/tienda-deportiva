@@ -21,34 +21,33 @@ const ProductCard = ({ producto }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        position: "relative", // 🔥 IMPORTANTE (para badge)
+        position: "relative",
         background: "#fff",
-        borderRadius: "20px",
+        borderRadius: "16px",
         overflow: "hidden",
-        transition: "0.3s",
-        transform: hover ? "translateY(-6px)" : "none",
+        transition: "0.25s",
+        transform: hover ? "translateY(-4px)" : "none",
         boxShadow: hover
-          ? "0 20px 50px rgba(0,0,0,0.12)"
-          : "0 8px 25px rgba(0,0,0,0.05)",
+          ? "0 15px 35px rgba(0,0,0,0.1)"
+          : "0 5px 15px rgba(0,0,0,0.05)",
         border: "1px solid #eee"
       }}
     >
+
       {/* 🔥 BADGE */}
       {producto.badge && (
         <span
           style={{
             position: "absolute",
-            top: "12px",
-            left: "12px",
-            background:
-              "linear-gradient(135deg, #d4a5ff, #b57bff)",
+            top: "10px",
+            left: "10px",
+            background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
             color: "#fff",
-            padding: "6px 12px",
+            padding: "4px 10px",
             borderRadius: "20px",
-            fontSize: "11px",
+            fontSize: "10px",
             fontWeight: "600",
-            zIndex: 2,
-            boxShadow: "0 5px 15px rgba(0,0,0,0.1)"
+            zIndex: 2
           }}
         >
           {producto.badge}
@@ -56,26 +55,28 @@ const ProductCard = ({ producto }) => {
       )}
 
       {/* 📸 IMAGEN */}
-      <div style={{ overflow: "hidden", background: "#f8f8f8" }}>
+      <div style={{ overflow: "hidden", background: "#fafafa" }}>
         <img
           src={producto.imagen}
           alt={producto.nombre}
           style={{
             width: "100%",
-            height: "220px",
+            height: "160px", // 🔥 MOBILE PRO
             objectFit: "contain",
-            transition: "0.4s",
+            transition: "0.3s",
             transform: hover ? "scale(1.05)" : "scale(1)"
           }}
         />
       </div>
 
       {/* 📦 INFO */}
-      <div style={{ padding: "18px" }}>
+      <div style={{ padding: "12px" }}>
+        
+        {/* 🏷 NOMBRE */}
         <h3
           style={{
-            fontSize: "1rem",
-            marginBottom: "6px",
+            fontSize: "13px",
+            marginBottom: "4px",
             color: "#1a1a1a",
             fontWeight: "500"
           }}
@@ -83,28 +84,28 @@ const ProductCard = ({ producto }) => {
           {producto.nombre}
         </h3>
 
-        {/* 💰 PRECIO PRO */}
+        {/* 💰 PRECIO */}
         <p
           style={{
             fontWeight: "600",
-            marginBottom: "12px",
+            marginBottom: "8px",
             color: "#b57bff",
-            fontSize: "15px"
+            fontSize: "14px"
           }}
         >
           ${producto.precio.toLocaleString()}
         </p>
 
         {/* 👕 TALLES */}
-        <div style={{ marginBottom: "12px" }}>
+        <div style={{ marginBottom: "8px" }}>
           {producto.talles.map((talle) => (
             <button
               key={talle}
               onClick={() => setTalleSeleccionado(talle)}
               style={{
-                margin: "4px",
-                padding: "6px 12px",
-                borderRadius: "20px",
+                margin: "3px",
+                padding: "4px 8px",
+                borderRadius: "15px",
                 border: "1px solid #ddd",
                 background:
                   talleSeleccionado === talle
@@ -115,7 +116,7 @@ const ProductCard = ({ producto }) => {
                     ? "#fff"
                     : "#333",
                 cursor: "pointer",
-                fontSize: "12px"
+                fontSize: "11px"
               }}
             >
               {talle}
@@ -123,17 +124,18 @@ const ProductCard = ({ producto }) => {
           ))}
         </div>
 
-        {/* 🔥 STOCK */}
+        {/* 🔥 STOCK (opcional, más limpio en mobile) */}
         <p
           style={{
-            fontSize: "12px",
-            color: "#888"
+            fontSize: "11px",
+            color: "#999",
+            marginBottom: "5px"
           }}
         >
           {sinStock ? "Sin stock" : `Stock: ${stockActual}`}
         </p>
 
-        {/* 🛒 BOTÓN */}
+        {/* 🛒 BOTÓN PRO */}
         <button
           disabled={sinStock}
           onClick={() => {
@@ -149,21 +151,20 @@ const ProductCard = ({ producto }) => {
           }}
           style={{
             width: "100%",
-            padding: "12px",
-            borderRadius: "25px",
+            padding: "10px",
+            borderRadius: "20px",
             border: "none",
             background: sinStock
               ? "#ccc"
               : "linear-gradient(135deg, #d4a5ff, #b57bff)",
             color: "#fff",
             fontWeight: "600",
+            fontSize: "12px",
             cursor: sinStock ? "not-allowed" : "pointer",
-            marginTop: "12px",
-            boxShadow:
-              "0 10px 25px rgba(180,120,255,0.3)"
+            marginTop: "6px"
           }}
         >
-          {sinStock ? "Sin stock" : "Agregar al carrito"}
+          {sinStock ? "Sin stock" : "Agregar 🛍️"}
         </button>
 
         {/* 🔧 ADMIN */}
@@ -185,10 +186,10 @@ const ProductCard = ({ producto }) => {
               );
             }}
             style={{
-              marginTop: "10px",
+              marginTop: "8px",
               width: "100%",
-              padding: "6px",
-              borderRadius: "8px",
+              padding: "5px",
+              borderRadius: "6px",
               border: "1px solid #ddd"
             }}
           />

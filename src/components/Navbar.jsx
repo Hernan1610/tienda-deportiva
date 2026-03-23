@@ -11,11 +11,7 @@ const Navbar = () => {
       
       {/* 🔥 LOGO */}
       <Link to="/">
-        <img
-          src={logo}
-          alt="BALANCE"
-          style={logoStyle}
-        />
+        <img src={logo} alt="BALANCE" style={logoStyle} />
       </Link>
 
       {/* 🔗 LINKS */}
@@ -40,43 +36,42 @@ const navStyle = {
   position: "sticky",
   top: 0,
   zIndex: 1000,
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(12px)",
-  padding: "10px 30px",
+  background: "#fff",
+  padding: "8px 12px", // 🔥 más compacto
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  borderBottom: "1px solid rgba(0,0,0,0.05)"
+  borderBottom: "1px solid #eee"
 };
 
 const logoStyle = {
-  height: "60px",
+  height: "40px", // 🔥 más chico para mobile
   objectFit: "contain"
 };
 
 const linksContainer = {
   display: "flex",
-  gap: "20px",
+  gap: "8px", // 🔥 menos espacio
   alignItems: "center"
 };
 
 const linkStyle = {
   textDecoration: "none",
-  color: "var(--text)",
+  color: "#333", // 🔥 SIEMPRE visible
   fontWeight: "500",
-  fontSize: "14px",
-  opacity: 0.8,
-  transition: "0.2s"
+  fontSize: "12px", // 🔥 más chico para que entre
 };
 
 const cartStyle = {
   background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
-  padding: "6px 14px",
+  padding: "5px 10px",
   borderRadius: "20px",
   color: "#fff",
   fontWeight: "600",
-  fontSize: "13px",
-  boxShadow: "0 4px 12px rgba(180,120,255,0.3)"
+  fontSize: "12px",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px"
 };
 
 export default Navbar;

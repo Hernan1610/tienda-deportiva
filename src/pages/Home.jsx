@@ -23,7 +23,7 @@ const Home = () => {
         </Link>
       </section>
 
-      {/* 🔥 DIVISOR PRO */}
+      {/* 🔥 DIVISOR */}
       <div style={divider} />
 
       {/* 👕 CATEGORÍAS */}
@@ -49,7 +49,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 💖 SECCIÓN EMOCIONAL */}
+      {/* 💖 EMOCIONAL */}
       <section style={emotionSection}>
         <h2 style={emotionTitle}>
           Más que ropa deportiva
@@ -98,39 +98,43 @@ const Home = () => {
 /* 🎨 ESTILOS */
 
 const heroStyle = {
-  minHeight: "85vh",
+  minHeight: "80vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
-  padding: "40px 20px",
+  padding: "20px",
+  gap: "10px", // 🔥 clave
   background: "linear-gradient(180deg, #fdf7fb 0%, #ffffff 100%)"
 };
 
 const titleStyle = {
-  fontSize: "clamp(36px, 6vw, 60px)",
-  marginBottom: "12px",
+  fontSize: "clamp(28px, 7vw, 44px)", // 🔥 responsive real
+  marginBottom: "10px",
   fontWeight: "700",
   letterSpacing: "-1px",
-  color: "#1a1a1a"
+  color: "#1a1a1a",
+  lineHeight: "1.2",
+  maxWidth: "300px"
 };
 
 const subtitleStyle = {
   color: "#666",
-  marginBottom: "30px",
-  maxWidth: "400px"
+  marginBottom: "20px",
+  maxWidth: "280px",
+  fontSize: "14px"
 };
 
 const ctaStyle = {
-  padding: "14px 34px",
-  borderRadius: "30px",
+  padding: "12px 26px",
+  borderRadius: "25px",
   border: "none",
   background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
   color: "#fff",
   fontWeight: "600",
   cursor: "pointer",
-  boxShadow: "0 10px 30px rgba(180,120,255,0.35)"
+  fontSize: "14px"
 };
 
 const divider = {
@@ -141,71 +145,73 @@ const divider = {
 };
 
 const sectionStyle = {
-  padding: "60px 20px",
+  padding: "50px 20px",
   maxWidth: "1200px",
   margin: "0 auto"
 };
 
 const sectionTitle = {
   textAlign: "center",
-  marginBottom: "30px",
+  marginBottom: "25px",
   fontWeight: "600",
-  fontSize: "22px"
+  fontSize: "20px"
 };
 
 const gridStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-  gap: "15px"
+  gap: "12px"
 };
 
 const gridProducts = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "25px"
+  gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+  gap: "15px"
 };
 
 const cardStyle = {
   background: "#fff",
-  padding: "25px",
-  borderRadius: "18px",
+  padding: "20px",
+  borderRadius: "15px",
   textAlign: "center",
   textDecoration: "none",
   color: "#333",
   fontWeight: "500",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
+  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
   transition: "0.3s"
 };
 
 const emotionSection = {
   textAlign: "center",
-  padding: "60px 20px"
+  padding: "50px 20px"
 };
 
 const emotionTitle = {
-  fontSize: "24px",
+  fontSize: "20px",
   marginBottom: "10px"
 };
 
 const emotionText = {
   color: "#666",
-  maxWidth: "500px",
-  margin: "0 auto"
+  maxWidth: "300px",
+  margin: "0 auto",
+  fontSize: "14px"
 };
 
 const ctaSection = {
   textAlign: "center",
-  padding: "80px 20px"
+  padding: "60px 20px"
 };
 
 const ctaTitle = {
   marginBottom: "10px",
-  fontSize: "24px"
+  fontSize: "20px"
 };
 
 const ctaText = {
   color: "#666",
-  marginBottom: "20px"
+  marginBottom: "20px",
+  fontSize: "14px"
 };
 
 export default Home;

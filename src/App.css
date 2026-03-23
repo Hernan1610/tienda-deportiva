@@ -8,6 +8,10 @@
   --accent-soft: #f3e8ff;
 }
 
+#root {
+  background: var(--bg);
+}
+
 /* 🔥 RESET */
 * {
   margin: 0;
@@ -80,6 +84,7 @@ h1, h2, h3 {
 }
 
 html, body, #root {
-  background: linear-gradient(180deg, #fdf7fb 0%, #ffffff 100%);
+  background: #fdf7fb !important;
+  color: #2b2b2b !important;
   min-height: 100%;
 }

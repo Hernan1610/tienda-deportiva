@@ -11,14 +11,15 @@ const Productos = () => {
     : productos;
 
   const getButtonStyle = (cat) => ({
-    padding: "10px 20px",
+    padding: "10px 18px",
     borderRadius: "20px",
-    border: "none",
+    border: "1px solid #eee",
     cursor: "pointer",
-    fontWeight: "bold",
-    transition: "0.3s",
-    background: categoria === cat ? "#fff" : "#222",
-    color: categoria === cat ? "#000" : "#fff",
+    fontWeight: "500",
+    transition: "0.25s",
+    background: categoria === cat ? "var(--accent-soft)" : "#fff",
+    color: categoria === cat ? "var(--accent)" : "#333",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.05)"
   });
 
   const cambiarCategoria = (cat) => {
@@ -30,56 +31,58 @@ const Productos = () => {
   };
 
   return (
-    <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-      <h1 style={{ textAlign: "center", marginTop: "20px" }}>
+    <div
+      style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "20px",
+        background: "var(--bg)",
+        minHeight: "100vh"
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          color: "var(--text)"
+        }}
+      >
         Productos
       </h1>
 
-      {/* BOTONES */}
+      {/* 🔥 FILTROS PRO */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           gap: "10px",
-          margin: "20px 0",
+          marginBottom: "25px",
+          flexWrap: "wrap"
         }}
       >
-        <button
-          style={getButtonStyle(undefined)}
-          onClick={() => cambiarCategoria("todos")}
-        >
+        <button style={getButtonStyle(undefined)} onClick={() => cambiarCategoria("todos")}>
           Todos
         </button>
 
-        <button
-          style={getButtonStyle("ropa")}
-          onClick={() => cambiarCategoria("ropa")}
-        >
+        <button style={getButtonStyle("ropa")} onClick={() => cambiarCategoria("ropa")}>
           Ropa
         </button>
 
-        <button
-          style={getButtonStyle("toallas")}
-          onClick={() => cambiarCategoria("toallas")}
-        >
+        <button style={getButtonStyle("toallas")} onClick={() => cambiarCategoria("toallas")}>
           Toallas
         </button>
 
-        <button
-          style={getButtonStyle("medias")}
-          onClick={() => cambiarCategoria("medias")}
-        >
+        <button style={getButtonStyle("medias")} onClick={() => cambiarCategoria("medias")}>
           Medias
         </button>
       </div>
 
-      {/* GRID */}
+      {/* 🔥 GRID REAL RESPONSIVE */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: window.innerWidth < 600 ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "20px",
-          padding: "20px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+          gap: "15px"
         }}
       >
         {productosFiltrados.map((p) => (

@@ -1,78 +1,109 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../context/CartContext";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const { carrito } = useContext(CartContext);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav style={navStyle}>
-      
-      {/* 🔥 LOGO */}
-      <Link to="/">
-        <img src={logo} alt="BALANCE" style={logoStyle} />
-      </Link>
+    <>
+      <nav style={navStyle}>
+        
+        {/* ☰ MENU */}
+        <button
+          onClick={() => setMenuOpen(true)}
+          style={menuBtn}
+        >
+          ☰
+        </button>
 
-      {/* 🔗 LINKS */}
-      <div style={linksContainer}>
-        <Link style={linkStyle} to="/">Inicio</Link>
-        <Link style={linkStyle} to="/productos">Productos</Link>
+        {/* LOGO */}
+        <Link to="/">
+          <img src={logo} alt="BALANCE" style={logoStyle} />
+        </Link>
 
         {/* 🛒 CARRITO */}
         <Link to="/carrito" style={{ textDecoration: "none" }}>
-          <span style={cartStyle}>
-  🛒
-  <span style={{
-    fontSize: "12px",
-    opacity: 0.6
-  }}>
-    ({carrito.length})
-  </span>
-</span>
+          <span style={cartStyle}>🛒 {carrito.length}</span>
         </Link>
-      </div>
-    </nav>
+      </nav>
+
+      {/* 🔥 MENU LATERAL */}
+      {menuOpen && (
+        <div style={overlay} onClick={() => setMenuOpen(false)}>
+          <div style={menu} onClick={(e) => e.stopPropagation()}>
+            
+            <h3 style={{ marginBottom: "20px" }}>Categorías</h3>
+
+            <Link to="/productos" onClick={() => setMenuOpen(false)} style={item}>
+              Todos
+            </Link>
+
+            <Link to="/productos/ropa" onClick={() => setMenuOpen(false)} style={item}>
+              Ropa
+            </Link>
+
+            <Link to="/productos/accesorios" onClick={() => setMenuOpen(false)} style={item}>
+              Accesorios
+            </Link>
+
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
 /* 🎨 ESTILOS */
 
 const navStyle = {
-  position: "sticky",
-  top: 0,
-  zIndex: 1000,
-  background: "#fff",
-  padding: "8px 12px", // 🔥 más compacto
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  padding: "10px 15px",
+  background: "#fff",
   borderBottom: "1px solid #eee"
 };
 
+const menuBtn = {
+  fontSize: "22px",
+  background: "transparent",
+  border: "none",
+  cursor: "pointer"
+};
+
 const logoStyle = {
-  height: "40px", // 🔥 más chico para mobile
-  objectFit: "contain"
-};
-
-const linksContainer = {
-  display: "flex",
-  gap: "8px", // 🔥 menos espacio
-  alignItems: "center"
-};
-
-const linkStyle = {
-  textDecoration: "none",
-  color: "#333", // 🔥 SIEMPRE visible
-  fontWeight: "500",
-  fontSize: "12px", // 🔥 más chico para que entre
+  height: "40px"
 };
 
 const cartStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: "5px",
-  fontSize: "14px",
+  fontSize: "20px"
+};
+
+const overlay = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  background: "rgba(0,0,0,0.3)",
+  zIndex: 1000
+};
+
+const menu = {
+  width: "250px",
+  height: "100%",
+  background: "#fff",
+  padding: "20px",
+  boxShadow: "0 0 20px rgba(0,0,0,0.1)"
+};
+
+const item = {
+  display: "block",
+  marginBottom: "15px",
+  textDecoration: "none",
   color: "#333",
   fontWeight: "500"
 };

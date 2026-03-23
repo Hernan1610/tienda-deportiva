@@ -22,8 +22,14 @@ const Navbar = () => {
         {/* 🛒 CARRITO */}
         <Link to="/carrito" style={{ textDecoration: "none" }}>
           <span style={cartStyle}>
-            🛒 {carrito.length}
-          </span>
+  🛒
+  <span style={{
+    fontSize: "12px",
+    opacity: 0.6
+  }}>
+    ({carrito.length})
+  </span>
+</span>
         </Link>
       </div>
     </nav>
@@ -63,15 +69,12 @@ const linkStyle = {
 };
 
 const cartStyle = {
-  background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
-  padding: "5px 10px",
-  borderRadius: "20px",
-  color: "#fff",
-  fontWeight: "600",
-  fontSize: "12px",
   display: "flex",
   alignItems: "center",
-  gap: "4px"
+  gap: "5px",
+  fontSize: "14px",
+  color: "#333",
+  fontWeight: "500"
 };
 
 export default Navbar;

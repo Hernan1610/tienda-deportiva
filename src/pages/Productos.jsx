@@ -77,7 +77,7 @@ const Productos = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gridTemplateColumns: window.innerWidth < 600 ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(250px, 1fr))",
           gap: "20px",
           padding: "20px",
         }}

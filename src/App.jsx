@@ -11,19 +11,34 @@ function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/productos/:categoria" element={<Productos />} />
-          <Route path="/carrito" element={<Carrito />} />
-        </Routes>
+        {/* 🔥 CONTENEDOR GLOBAL (ESTO TE ARREGLA TODO EL FONDO) */}
+        <div
+          style={{
+            background: "var(--bg)",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Navbar />
 
-        <Footer />
+          {/* 🔥 CONTENIDO */}
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<Productos />} />
+              <Route path="/productos/:categoria" element={<Productos />} />
+              <Route path="/carrito" element={<Carrito />} />
+            </Routes>
+          </div>
 
-        {/* 🔥 BOTÓN GLOBAL */}
-        <WhatsAppButton />
+          <Footer />
+
+          {/* 🔥 BOTÓN WHATSAPP */}
+          <WhatsAppButton />
+        </div>
+
       </BrowserRouter>
     </CartProvider>
   );

@@ -16,43 +16,43 @@ const Carrito = () => {
   );
 
   const handleWhatsApp = () => {
-  const telefono = "5492634391870";
+    const telefono = "5492634391870";
 
-  const items = carrito
-    .map(
-  (p) =>
-    `🛍️ ${p.nombre} (Talle: ${p.talle})\nCantidad: ${p.cantidad}\nSubtotal: $${p.precio * (p.cantidad || 1)}`
-)
-    .join("\n\n");
+    const items = carrito
+      .map(
+        (p) =>
+          `🛍️ ${p.nombre} (Talle: ${p.talle})\nCantidad: ${p.cantidad}\nSubtotal: $${p.precio * (p.cantidad || 1)}`
+      )
+      .join("\n\n");
 
-  const texto = `Hola! 👋\n\nQuiero hacer el siguiente pedido:\n\n${items}\n\n💰 Total: $${total}\n\nGracias!`;
+    const texto = `Hola! 👋\n\nQuiero hacer el siguiente pedido:\n\n${items}\n\n💰 Total: $${total}\n\nGracias!`;
 
-  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
 
-  window.open(url, "_blank");
-};
+    window.open(url, "_blank");
+  };
 
   return (
     <div
       style={{
-        maxWidth: "600px", // 🔥 mejor para celular
-        margin: "20px auto",
+        maxWidth: "600px",
+        margin: "30px auto",
         padding: "15px",
-        color: "#fff",
       }}
     >
       <h1
         style={{
           textAlign: "center",
-          marginBottom: "20px",
-          fontSize: "2rem",
+          marginBottom: "25px",
+          fontSize: "28px",
+          color: "var(--text)",
         }}
       >
         🛒 Tu carrito
       </h1>
 
       {carrito.length === 0 ? (
-        <p style={{ textAlign: "center", opacity: 0.7 }}>
+        <p style={{ textAlign: "center", color: "var(--subtext)" }}>
           No hay productos todavía
         </p>
       ) : (
@@ -61,103 +61,74 @@ const Carrito = () => {
             <div
               key={p.id}
               style={{
-                display: "flex",
-                flexDirection: "column", // 🔥 mobile
-                gap: "15px",
-                background: "#111",
+                background: "#fff",
                 padding: "15px",
-                borderRadius: "15px",
+                borderRadius: "16px",
                 marginBottom: "20px",
-                boxShadow: "0 5px 20px rgba(0,0,0,0.4)",
+                boxShadow: "0 8px 25px rgba(0,0,0,0.05)",
+                border: "1px solid #eee",
               }}
             >
-              {/* imagen */}
               <img
                 src={p.imagen}
                 alt={p.nombre}
                 style={{
                   width: "100%",
-                  height: "200px",
-                  objectFit: "cover",
+                  height: "180px",
+                  objectFit: "contain",
                   borderRadius: "12px",
+                  marginBottom: "10px",
                 }}
               />
 
-             {/* info */}
-<div>
-  <h3>{p.nombre}</h3>
+              <h3 style={{ color: "#222" }}>{p.nombre}</h3>
 
-  {/* 👕 TALLE */}
-  <p style={{ fontSize: "14px", opacity: 0.7 }}>
-    Talle: {p.talle}
-  </p>
+              <p style={{ color: "var(--subtext)" }}>
+                Talle: {p.talle}
+              </p>
 
-  <p style={{ opacity: 0.7 }}>${p.precio}</p>
+              <p style={{ color: "var(--subtext)" }}>
+                ${p.precio}
+              </p>
 
-  <p style={{ fontWeight: "bold" }}>
-    Subtotal: ${p.precio * (p.cantidad || 1)}
-  </p>
-</div>
-              {/* controles */}
+              <p style={{ fontWeight: "600" }}>
+                Subtotal: ${p.precio * (p.cantidad || 1)}
+              </p>
+
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
+                  marginTop: "10px",
                   alignItems: "center",
                 }}
               >
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <button
-                    style={btnCantidad}
-                    onClick={() => restarCantidad(p.id)}
-                  >
+                  <button style={btnCantidad} onClick={() => restarCantidad(p.id)}>
                     -
                   </button>
 
-                  <span style={{ fontSize: "1.2rem" }}>{p.cantidad}</span>
+                  <span>{p.cantidad}</span>
 
-                  <button
-                    style={btnCantidad}
-                    onClick={() => agregarAlCarrito(p)}
-                  >
+                  <button style={btnCantidad} onClick={() => agregarAlCarrito(p)}>
                     +
                   </button>
                 </div>
 
-                <button
-                  onClick={() => eliminarDelCarrito(p.id)}
-                  style={btnEliminar}
-                >
+                <button onClick={() => eliminarDelCarrito(p.id)} style={btnEliminar}>
                   ❌
                 </button>
               </div>
             </div>
           ))}
 
-          {/* resumen */}
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "20px",
-              background: "#111",
-              borderRadius: "15px",
-              textAlign: "center",
-            }}
-          >
-            <h2 style={{ marginBottom: "15px" }}>
-              Total: ${total}
-            </h2>
+          {/* RESUMEN */}
+          <div style={resumenBox}>
+            <h2>Total: ${total}</h2>
 
-            {/* 🔥 BOTÓN GRANDE WHATSAPP */}
-            <button
-              style={btnComprar}
-              onClick={handleWhatsApp}
-            >
-              📲 Comprar por WhatsApp
+            <button style={btnComprar} onClick={handleWhatsApp}>
+              Comprar por WhatsApp
             </button>
-
-            <br />
-            <br />
 
             <button onClick={vaciarCarrito} style={btnVaciar}>
               Vaciar carrito
@@ -169,45 +140,50 @@ const Carrito = () => {
   );
 };
 
-// 🎨 estilos optimizados mobile
-
 const btnCantidad = {
-  padding: "10px 15px",
+  padding: "8px 14px",
   borderRadius: "10px",
-  border: "none",
-  background: "#222",
-  color: "#fff",
+  border: "1px solid #ddd",
+  background: "#fff",
   cursor: "pointer",
-  fontSize: "18px",
 };
 
 const btnEliminar = {
   background: "transparent",
   border: "none",
-  color: "red",
-  fontSize: "20px",
+  color: "#ff4d6d",
+  fontSize: "18px",
   cursor: "pointer",
 };
 
 const btnComprar = {
   width: "100%",
-  padding: "15px",
+  padding: "14px",
   borderRadius: "30px",
   border: "none",
-  background: "#25D366",
+  background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
   color: "#fff",
-  fontWeight: "bold",
-  fontSize: "16px",
+  fontWeight: "600",
+  marginTop: "15px",
   cursor: "pointer",
 };
 
 const btnVaciar = {
-  padding: "10px 20px",
+  marginTop: "10px",
+  padding: "10px",
   borderRadius: "20px",
-  border: "none",
-  background: "#444",
-  color: "#fff",
+  border: "1px solid #ddd",
+  background: "#fff",
   cursor: "pointer",
+};
+
+const resumenBox = {
+  marginTop: "20px",
+  padding: "20px",
+  background: "#fff",
+  borderRadius: "16px",
+  textAlign: "center",
+  boxShadow: "0 8px 25px rgba(0,0,0,0.05)",
 };
 
 export default Carrito;

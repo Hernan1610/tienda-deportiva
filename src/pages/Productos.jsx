@@ -50,33 +50,6 @@ const Productos = () => {
         Productos
       </h1>
 
-      {/* 🔥 FILTROS PRO */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "10px",
-          marginBottom: "25px",
-          flexWrap: "wrap"
-        }}
-      >
-        <button style={getButtonStyle(undefined)} onClick={() => cambiarCategoria("todos")}>
-          Todos
-        </button>
-
-        <button style={getButtonStyle("ropa")} onClick={() => cambiarCategoria("ropa")}>
-          Ropa
-        </button>
-
-        <button style={getButtonStyle("toallas")} onClick={() => cambiarCategoria("toallas")}>
-          Toallas
-        </button>
-
-        <button style={getButtonStyle("medias")} onClick={() => cambiarCategoria("medias")}>
-          Medias
-        </button>
-      </div>
-
       {/* 🔥 GRID REAL RESPONSIVE */}
       <div
         style={{

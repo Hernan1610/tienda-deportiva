@@ -1,6 +1,6 @@
 /* 🔥 VARIABLES DE MARCA (BALANCE) */
 :root {
-  --bg: #f6a5d7;
+  --bg: #faa4d3;
   --card: #ffffff;
   --text: #2b2b2b;
   --subtext: #777;
@@ -22,7 +22,7 @@
 /* 🔥 BODY */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(180deg, #f9e9f3 0%, #ffffff 100%);
+  background: linear-gradient(180deg, #ffa7d7 0%, #ffffff 100%);
   color: var(--text);
 }
 

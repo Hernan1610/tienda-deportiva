@@ -6,16 +6,13 @@ import logo from "../assets/logo.png";
 const Navbar = () => {
   const { carrito } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [productosOpen, setProductosOpen] = useState(false);
 
   return (
     <>
       <nav style={navStyle}>
-        
-        {/* ☰ MENU */}
-        <button
-          onClick={() => setMenuOpen(true)}
-          style={menuBtn}
-        >
+        {/* ☰ */}
+        <button onClick={() => setMenuOpen(true)} style={menuBtn}>
           ☰
         </button>
 
@@ -24,30 +21,55 @@ const Navbar = () => {
           <img src={logo} alt="BALANCE" style={logoStyle} />
         </Link>
 
-        {/* 🛒 CARRITO */}
-        <Link to="/carrito" style={{ textDecoration: "none" }}>
-          <span style={cartStyle}>🛒 {carrito.length}</span>
+        {/* CARRITO */}
+        <Link to="/carrito">
+          <span style={cartStyle}>🛒</span>
         </Link>
       </nav>
 
-      {/* 🔥 MENU LATERAL */}
+      {/* OVERLAY */}
       {menuOpen && (
         <div style={overlay} onClick={() => setMenuOpen(false)}>
           <div style={menu} onClick={(e) => e.stopPropagation()}>
-            
-            <h3 style={{ marginBottom: "20px" }}>Categorías</h3>
 
-            <Link to="/productos" onClick={() => setMenuOpen(false)} style={item}>
-              Todos
-            </Link>
+            {/* PRODUCTOS */}
+            <div>
+              <div
+                style={menuTitle}
+                onClick={() => setProductosOpen(!productosOpen)}
+              >
+                Productos ▾
+              </div>
 
-            <Link to="/productos/ropa" onClick={() => setMenuOpen(false)} style={item}>
-              Ropa
-            </Link>
+              {productosOpen && (
+                <div style={submenu}>
+                  
+                  <Link to="/productos" onClick={() => setMenuOpen(false)} style={item}>
+                    Ver todos
+                  </Link>
 
-            <Link to="/productos/accesorios" onClick={() => setMenuOpen(false)} style={item}>
-              Accesorios
-            </Link>
+                  <Link to="/productos/toallones" style={item}>Toallones y toallas</Link>
+                  <Link to="/productos/medias-antideslizantes" style={item}>Medias antideslizantes</Link>
+                  <Link to="/productos/medias-soquetes" style={item}>Medias soquetes</Link>
+                  <Link to="/productos/botellas" style={item}>Botellas</Link>
+
+                  <Link to="/productos/tops" style={item}>Tops</Link>
+                  <Link to="/productos/musculosas" style={item}>Musculosas</Link>
+                  <Link to="/productos/remeras" style={item}>Remeras M/cortas</Link>
+
+                  <Link to="/productos/buzo-plush" style={item}>Buzos plush</Link>
+                  <Link to="/productos/buzo-crop" style={item}>Buzos crops</Link>
+                  <Link to="/productos/buzo-polar" style={item}>Buzo polar</Link>
+                  <Link to="/productos/maxi-buzo" style={item}>Maxi buzo</Link>
+                  <Link to="/productos/buzo-cierre" style={item}>Buzo con cierre</Link>
+
+                  <Link to="/productos/calza-biker" style={item}>Calzas biker</Link>
+                  <Link to="/productos/calza-capri" style={item}>Calzas capri</Link>
+                  <Link to="/productos/calza-larga" style={item}>Calzas largas</Link>
+
+                </div>
+              )}
+            </div>
 
           </div>
         </div>
@@ -70,8 +92,7 @@ const navStyle = {
 const menuBtn = {
   fontSize: "22px",
   background: "transparent",
-  border: "none",
-  cursor: "pointer"
+  border: "none"
 };
 
 const logoStyle = {
@@ -84,28 +105,38 @@ const cartStyle = {
 
 const overlay = {
   position: "fixed",
-  top: 0,
-  left: 0,
   width: "100%",
   height: "100%",
   background: "rgba(0,0,0,0.3)",
+  top: 0,
+  left: 0,
   zIndex: 1000
 };
 
 const menu = {
-  width: "250px",
+  width: "260px",
   height: "100%",
   background: "#fff",
   padding: "20px",
-  boxShadow: "0 0 20px rgba(0,0,0,0.1)"
+  overflowY: "auto"
+};
+
+const menuTitle = {
+  fontWeight: "600",
+  marginBottom: "10px",
+  cursor: "pointer"
+};
+
+const submenu = {
+  marginLeft: "10px"
 };
 
 const item = {
   display: "block",
-  marginBottom: "15px",
+  padding: "8px 0",
   textDecoration: "none",
   color: "#333",
-  fontWeight: "500"
+  fontSize: "14px"
 };
 
 export default Navbar;

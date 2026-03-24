@@ -1,32 +1,38 @@
 import { Link } from "react-router-dom";
 import { productos } from "../data/productos";
 import ProductCard from "../components/ProductCard";
+import heroImg from "../assets/heroo.png";
 
 const Home = () => {
   return (
     <div style={{ background: "var(--bg)", color: "var(--text)" }}>
 
-      {/* 🔥 HERO */}
+      {/* 🔥 HERO PRO */}
       <section style={heroStyle}>
-        <h1 style={titleStyle}>
-          Vestite para sentirte bien ✨
-        </h1>
+        <div style={overlay} />
+        <img src={heroImg} alt="Balance" style={heroImage} />
 
-        <p style={subtitleStyle}>
-          Ropa deportiva cómoda, femenina y pensada para tu día a día
-        </p>
+        <div style={heroContent}>
+          <h1 style={titleStyle}>
+            Vestite para sentirte bien ✨
+          </h1>
 
-        <Link to="/productos">
-          <button style={ctaStyle}>
-            Ver colección
-          </button>
-        </Link>
+          <p style={subtitleStyle}>
+            Ropa deportiva cómoda, femenina y pensada para tu día a día
+          </p>
+
+          <Link to="/productos">
+            <button style={ctaStyle}>
+              Ver colección
+            </button>
+          </Link>
+        </div>
       </section>
 
-      {/* 🔥 DIVISOR */}
+      {/* DIVISOR */}
       <div style={divider} />
 
-      {/* 👕 CATEGORÍAS */}
+      {/* CATEGORÍAS */}
       <section style={sectionStyle}>
         <h2 style={sectionTitle}>Explorá BALANCE</h2>
 
@@ -49,7 +55,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 💖 EMOCIONAL */}
+      {/* EMOCIONAL */}
       <section style={emotionSection}>
         <h2 style={emotionTitle}>
           Más que ropa deportiva
@@ -60,7 +66,7 @@ const Home = () => {
         </p>
       </section>
 
-      {/* ⭐ DESTACADOS */}
+      {/* DESTACADOS */}
       <section style={sectionStyle}>
         <h2 style={sectionTitle}>Lo más elegido</h2>
 
@@ -71,7 +77,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 💬 CTA FINAL */}
+      {/* CTA FINAL */}
       <section style={ctaSection}>
         <h2 style={ctaTitle}>
           Elegí tu conjunto ideal 💖
@@ -91,52 +97,78 @@ const Home = () => {
           </button>
         </a>
       </section>
+
     </div>
   );
 };
 
 /* 🎨 ESTILOS */
 
+/* HERO */
 const heroStyle = {
-  minHeight: "80vh",
+  position: "relative",
+  height: "90vh",
+  width: "100%",
+  overflow: "hidden",
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
   alignItems: "center",
+  justifyContent: "center"
+};
+
+const heroImage = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  top: 0,
+  left: 0,
+  animation: "zoomHero 20s ease-in-out infinite alternate"
+};
+
+const overlay = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  background: "linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.6))",
+  zIndex: 1
+};
+
+const heroContent = {
+  position: "relative",
+  zIndex: 2,
   textAlign: "center",
+  color: "#fff",
   padding: "20px",
-  gap: "10px", // 🔥 clave
-  background: "linear-gradient(180deg, #fdf7fb 0%, #ffffff 100%)"
+  maxWidth: "90%"
 };
 
 const titleStyle = {
-  fontSize: "clamp(28px, 7vw, 44px)", // 🔥 responsive real
+  fontSize: "clamp(30px, 6vw, 60px)",
   marginBottom: "10px",
   fontWeight: "700",
   letterSpacing: "-1px",
-  color: "#1a1a1a",
-  lineHeight: "1.2",
-  maxWidth: "300px"
+  lineHeight: "1.1",
+  textShadow: "0 5px 20px rgba(0,0,0,0.4)"
 };
 
 const subtitleStyle = {
-  color: "#666",
-  marginBottom: "20px",
-  maxWidth: "280px",
-  fontSize: "14px"
+  color: "rgba(255,255,255,0.85)",
+  marginBottom: "25px",
+  fontSize: "15px"
 };
 
 const ctaStyle = {
-  padding: "12px 26px",
-  borderRadius: "25px",
+  padding: "14px 30px",
+  borderRadius: "30px",
   border: "none",
   background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
   color: "#fff",
   fontWeight: "600",
   cursor: "pointer",
-  fontSize: "14px"
+  boxShadow: "0 10px 30px rgba(180,120,255,0.4)"
 };
 
+/* RESTO */
 const divider = {
   height: "1px",
   width: "80%",

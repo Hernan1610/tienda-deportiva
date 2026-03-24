@@ -1,4 +1,4 @@
-/* 🔥 RESET TOTAL (SIN DARK MODE) */
+/* 🔥 RESET TOTAL */
 
 * {
   margin: 0;
@@ -6,9 +6,9 @@
   box-sizing: border-box;
 }
 
-/* 🔥 VARIABLES LIMPIAS (SOLO LIGHT MODE) */
+/* 🔥 VARIABLES DE MARCA (BALANCE PRO) */
 :root {
-  --bg: #fabfe7;
+  --bg: #f9c9ee; /* 💖 rosa pastel más pro */
   --card: #ffffff;
   --text: #2b2b2b;
   --subtext: #777;
@@ -16,18 +16,20 @@
   --accent-soft: #f3e8ff;
 }
 
-/* 🔥 BASE GLOBAL */
+/* 🔥 BASE GLOBAL (CLAVE PARA SACAR EL NEGRO) */
 html, body {
-  background: var(--bg);
+  background: var(--bg) !important;
   color: var(--text);
   font-family: 'Arial', sans-serif;
+  min-height: 100vh;
 }
 
-/* 🔥 ROOT */
+/* 🔥 ROOT (IMPORTANTE) */
 #root {
   max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
+  background: transparent !important;
 }
 
 /* 🔗 LINKS */
@@ -56,4 +58,14 @@ h1, h2, h3 {
 /* 🔥 TEXTO SECUNDARIO */
 .text-muted {
   color: var(--subtext);
+}
+
+/* 🔥 HERO ANIMATION (IMPORTANTE PARA HOME) */
+@keyframes zoomHero {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }

@@ -119,10 +119,10 @@ const heroImage = {
   position: "absolute",
   width: "100%",
   height: "100%",
-  objectFit: "cover",
+  objectFit: "contain", // 🔥 CAMBIO CLAVE
   top: 0,
   left: 0,
-  transform: "scale(1.05)" // 🔥 menos zoom (antes 1.1)
+  background: "#f9c9ee" // 🔥 relleno rosa (marca)
 };
 
 const overlay = {

@@ -122,14 +122,14 @@ const heroImage = {
   objectFit: "cover",
   top: 0,
   left: 0,
-  animation: "zoomHero 20s ease-in-out infinite alternate"
+  transform: "scale(1.05)" // 🔥 menos zoom (antes 1.1)
 };
 
 const overlay = {
   position: "absolute",
   width: "100%",
   height: "100%",
-  background: "linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.6))",
+  background: "rgba(0,0,0,0.25)", // 🔥 más suave
   zIndex: 1
 };
 
@@ -137,24 +137,31 @@ const heroContent = {
   position: "relative",
   zIndex: 2,
   textAlign: "center",
-  color: "#fff",
-  padding: "20px",
-  maxWidth: "90%"
+  padding: "25px",
+  borderRadius: "20px",
+
+  /* 🔥 EFECTO GLASS PREMIUM */
+  background: "rgba(255, 255, 255, 0.15)",
+  backdropFilter: "blur(10px)",
+  WebkitBackdropFilter: "blur(10px)",
+
+  border: "1px solid rgba(255,255,255,0.3)",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+
+  maxWidth: "320px"
 };
 
 const titleStyle = {
-  fontSize: "clamp(30px, 6vw, 60px)",
-  marginBottom: "10px",
+  fontSize: "clamp(30px, 6vw, 50px)",
   fontWeight: "700",
-  letterSpacing: "-1px",
-  lineHeight: "1.1",
-  textShadow: "0 5px 20px rgba(0,0,0,0.4)"
+  marginBottom: "10px",
+  color: "#fff"
 };
 
 const subtitleStyle = {
-  color: "rgba(255,255,255,0.85)",
-  marginBottom: "25px",
-  fontSize: "15px"
+  color: "rgba(255,255,255,0.9)",
+  marginBottom: "20px",
+  fontSize: "14px"
 };
 
 const ctaStyle = {

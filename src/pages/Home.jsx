@@ -9,25 +9,28 @@ const Home = () => {
 
       {/* 🔥 HERO PRO */}
       <section style={heroStyle}>
-        <div style={overlay} />
-        <img src={heroImg} alt="Balance" style={heroImage} />
+  <div style={heroBox}>
 
-        <div style={heroContent}>
-          <h1 style={titleStyle}>
-            Vestite para sentirte bien ✨
-          </h1>
+    <img src={heroImg} alt="Balance" style={heroImage} />
 
-          <p style={subtitleStyle}>
-            Ropa deportiva cómoda, femenina y pensada para tu día a día
-          </p>
+    <div style={heroContent}>
+      <h1 style={titleStyle}>
+        Vestite para sentirte bien ✨
+      </h1>
 
-          <Link to="/productos">
-            <button style={ctaStyle}>
-              Ver colección
-            </button>
-          </Link>
-        </div>
-      </section>
+      <p style={subtitleStyle}>
+        Ropa deportiva cómoda, femenina y pensada para tu día a día
+      </p>
+
+      <Link to="/productos">
+        <button style={ctaStyle}>
+          Ver colección
+        </button>
+      </Link>
+    </div>
+
+  </div>
+</section>
 
       {/* DIVISOR */}
       <div style={divider} />
@@ -106,23 +109,19 @@ const Home = () => {
 
 /* HERO */
 const heroStyle = {
-  position: "relative",
-  height: "90vh",
   width: "100%",
-  overflow: "hidden",
+  minHeight: "70vh", // 🔥 baja la altura
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+  padding: "20px",
 };
 
 const heroImage = {
-  position: "absolute",
   width: "100%",
   height: "100%",
-  objectFit: "contain", // 🔥 CAMBIO CLAVE
-  top: 0,
-  left: 0,
-  background: "#f9c9ee" // 🔥 relleno rosa (marca)
+  objectFit: "contain", // 🔥 clave
+  objectPosition: "center",
 };
 
 const overlay = {

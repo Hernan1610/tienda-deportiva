@@ -9,28 +9,32 @@ const Home = () => {
 
       {/* 🔥 HERO PRO */}
       <section style={heroStyle}>
-  <div style={heroBox}>
+        <div style={heroBox}>
+          
+          <img 
+            src={heroImg} 
+            alt="Balance" 
+            style={heroImage}
+          />
 
-    <img src={heroImg} alt="Balance" style={heroImage} />
+          <div style={heroContent}>
+            <h1 style={titleStyle}>
+              Vestite para sentirte bien ✨
+            </h1>
 
-    <div style={heroContent}>
-      <h1 style={titleStyle}>
-        Vestite para sentirte bien ✨
-      </h1>
+            <p style={subtitleStyle}>
+              Ropa deportiva cómoda, femenina y pensada para tu día a día
+            </p>
 
-      <p style={subtitleStyle}>
-        Ropa deportiva cómoda, femenina y pensada para tu día a día
-      </p>
+            <Link to="/productos">
+              <button style={ctaStyle}>
+                Ver colección
+              </button>
+            </Link>
+          </div>
 
-      <Link to="/productos">
-        <button style={ctaStyle}>
-          Ver colección
-        </button>
-      </Link>
-    </div>
-
-  </div>
-</section>
+        </div>
+      </section>
 
       {/* DIVISOR */}
       <div style={divider} />
@@ -105,53 +109,52 @@ const Home = () => {
   );
 };
 
-/* 🎨 ESTILOS */
+/* 🎨 HERO */
 
-/* HERO */
 const heroStyle = {
   width: "100%",
-  minHeight: "70vh", // 🔥 baja la altura
   display: "flex",
-  alignItems: "center",
   justifyContent: "center",
   padding: "20px",
 };
 
-const heroImage = {
+const heroBox = {
   width: "100%",
-  height: "100%",
-  objectFit: "contain", // 🔥 clave
-  objectPosition: "center",
+  maxWidth: "1000px",
+  borderRadius: "20px",
+  overflow: "hidden",
+  position: "relative",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
 };
 
-const overlay = {
-  position: "absolute",
+const heroImage = {
   width: "100%",
-  height: "100%",
-  background: "rgba(0,0,0,0.25)", // 🔥 más suave
-  zIndex: 1
+  height: "auto",
+  objectFit: "contain", // 🔥 ya no hace zoom
+  display: "block"
 };
 
 const heroContent = {
-  position: "relative",
-  zIndex: 2,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   textAlign: "center",
-  padding: "25px",
+  padding: "20px",
   borderRadius: "20px",
 
-  /* 🔥 EFECTO GLASS PREMIUM */
-  background: "rgba(255, 255, 255, 0.15)",
-  backdropFilter: "blur(10px)",
-  WebkitBackdropFilter: "blur(10px)",
+  /* 🔥 MÁS TRANSPARENTE */
+  background: "rgba(255, 255, 255, 0.08)",
+  backdropFilter: "blur(6px)",
 
-  border: "1px solid rgba(255,255,255,0.3)",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+  border: "1px solid rgba(255,255,255,0.2)",
+  boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
 
-  maxWidth: "320px"
+  maxWidth: "280px"
 };
 
 const titleStyle = {
-  fontSize: "clamp(30px, 6vw, 50px)",
+  fontSize: "clamp(26px, 6vw, 40px)",
   fontWeight: "700",
   marginBottom: "10px",
   color: "#fff"
@@ -160,21 +163,21 @@ const titleStyle = {
 const subtitleStyle = {
   color: "rgba(255,255,255,0.9)",
   marginBottom: "20px",
-  fontSize: "14px"
+  fontSize: "13px"
 };
 
 const ctaStyle = {
-  padding: "14px 30px",
-  borderRadius: "30px",
+  padding: "12px 26px",
+  borderRadius: "25px",
   border: "none",
   background: "linear-gradient(135deg, #d4a5ff, #b57bff)",
   color: "#fff",
   fontWeight: "600",
-  cursor: "pointer",
-  boxShadow: "0 10px 30px rgba(180,120,255,0.4)"
+  cursor: "pointer"
 };
 
 /* RESTO */
+
 const divider = {
   height: "1px",
   width: "80%",

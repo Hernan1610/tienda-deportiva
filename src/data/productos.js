@@ -178,11 +178,7 @@ export const productos = [
     talles: ["Único"],
     stock: 15
   },
-
-
-  // 🧦 MEDIAS ANTIDESLIZANTES
-
-  {
+   {
     id: 18,
     nombre: "Medias Antideslizantes Gris Negra",
     precio: 5000,
@@ -243,5 +239,6 @@ export const productos = [
     talles: ["Único"],
     stock: 10
   }
+
 
 ];

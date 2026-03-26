@@ -7,17 +7,17 @@ export const productos = [
     nombre: "Toallón Deportivo Azul",
     precio: 12000,
     imagen: "/toallon-azul.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
-    stock: 10
+    stock: 6
   },
   {
     id: 2,
     nombre: "Toallón Azul Oscuro",
     precio: 12000,
     imagen: "/toallon-azul-oscuro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -27,7 +27,7 @@ export const productos = [
     nombre: "Toallón Beige",
     precio: 12000,
     imagen: "/toallon-beige.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -37,7 +37,7 @@ export const productos = [
     nombre: "Toallón Gris Claro",
     precio: 12000,
     imagen: "/toallon-gris-claro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -47,7 +47,7 @@ export const productos = [
     nombre: "Toallón Gris Oscuro",
     precio: 12000,
     imagen: "/toallon-gris-oscuro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -57,7 +57,7 @@ export const productos = [
     nombre: "Toallón Morado",
     precio: 12000,
     imagen: "/toallon-morado.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10,
@@ -68,7 +68,7 @@ export const productos = [
     nombre: "Toallón Negro",
     precio: 12000,
     imagen: "/toallon-negro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -78,7 +78,7 @@ export const productos = [
     nombre: "Toallón Rojo",
     precio: 12000,
     imagen: "/toallon-rojo.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallones",
     talles: ["Único"],
     stock: 10
@@ -92,7 +92,7 @@ export const productos = [
     nombre: "Toalla Azul",
     precio: 6000,
     imagen: "/toalla-azul.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -102,7 +102,7 @@ export const productos = [
     nombre: "Toalla Azul Oscuro",
     precio: 6000,
     imagen: "/toalla-azul-oscuro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -112,7 +112,7 @@ export const productos = [
     nombre: "Toalla Beige",
     precio: 6000,
     imagen: "/toalla-beige.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -122,7 +122,7 @@ export const productos = [
     nombre: "Toalla Gris",
     precio: 6000,
     imagen: "/toalla-gris.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -132,7 +132,7 @@ export const productos = [
     nombre: "Toalla Gris Oscuro",
     precio: 6000,
     imagen: "/toalla-gris-oscuro.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -142,7 +142,7 @@ export const productos = [
     nombre: "Toalla Lila",
     precio: 6000,
     imagen: "/toalla-lila.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15,
@@ -153,7 +153,7 @@ export const productos = [
     nombre: "Toalla Roja",
     precio: 6000,
     imagen: "/toalla-roja.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -163,7 +163,7 @@ export const productos = [
     nombre: "Toalla Rosa",
     precio: 6000,
     imagen: "/toalla-rosa.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
@@ -173,7 +173,7 @@ export const productos = [
     nombre: "Toalla Verde",
     precio: 6000,
     imagen: "/toalla-verde.png",
-    categoria: "accesorios",
+    categoria: "productos",
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15

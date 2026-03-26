@@ -7,6 +7,7 @@ const Navbar = () => {
   const { carrito } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productosOpen, setProductosOpen] = useState(false);
+  const [mediasOpen, setMediasOpen] = useState(false);
 
   return (
     <>
@@ -27,7 +28,7 @@ const Navbar = () => {
         </Link>
       </nav>
 
-      {/* OVERLAY */}
+      {/* MENU */}
       {menuOpen && (
         <div style={overlay} onClick={() => setMenuOpen(false)}>
           <div style={menu} onClick={(e) => e.stopPropagation()}>
@@ -43,29 +44,36 @@ const Navbar = () => {
 
               {productosOpen && (
                 <div style={submenu}>
-                  
-                  <Link to="/productos" onClick={() => setMenuOpen(false)} style={item}>
-                    Ver todos
-                  </Link>
 
-                  <Link to="/productos/toallones" style={item}>Toallones y toallas</Link>
-                  <Link to="/productos/medias-antideslizantes" style={item}>Medias antideslizantes</Link>
-                  <Link to="/productos/medias-soquetes" style={item}>Medias soquetes</Link>
-                  <Link to="/productos/botellas" style={item}>Botellas</Link>
+                  {/* MEDIAS */}
+                  <div>
+                    <div
+                      style={menuTitle}
+                      onClick={() => setMediasOpen(!mediasOpen)}
+                    >
+                      Medias ▾
+                    </div>
 
-                  <Link to="/productos/tops" style={item}>Tops</Link>
-                  <Link to="/productos/musculosas" style={item}>Musculosas</Link>
-                  <Link to="/productos/remeras" style={item}>Remeras M/cortas</Link>
+                    {mediasOpen && (
+                      <div style={submenu}>
+                        <Link
+                          to="/productos/medias/antideslizantes"
+                          style={item}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          Antideslizantes
+                        </Link>
 
-                  <Link to="/productos/buzo-plush" style={item}>Buzos plush</Link>
-                  <Link to="/productos/buzo-crop" style={item}>Buzos crops</Link>
-                  <Link to="/productos/buzo-polar" style={item}>Buzo polar</Link>
-                  <Link to="/productos/maxi-buzo" style={item}>Maxi buzo</Link>
-                  <Link to="/productos/buzo-cierre" style={item}>Buzo con cierre</Link>
-
-                  <Link to="/productos/calza-biker" style={item}>Calzas biker</Link>
-                  <Link to="/productos/calza-capri" style={item}>Calzas capri</Link>
-                  <Link to="/productos/calza-larga" style={item}>Calzas largas</Link>
+                        <Link
+                          to="/productos/medias/amanecer"
+                          style={item}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          Amanecer
+                        </Link>
+                      </div>
+                    )}
+                  </div>
 
                 </div>
               )}
@@ -92,7 +100,8 @@ const navStyle = {
 const menuBtn = {
   fontSize: "22px",
   background: "transparent",
-  border: "none"
+  border: "none",
+  cursor: "pointer"
 };
 
 const logoStyle = {

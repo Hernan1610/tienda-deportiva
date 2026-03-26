@@ -1,63 +1,22 @@
 import { productos } from "../data/productos";
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Productos = () => {
-  const [filtro, setFiltro] = useState("todos");
+  const { categoria, subcategoria } = useParams();
 
-  const productosFiltrados =
-    filtro === "todos"
-      ? productos
-      : productos.filter((p) => p.subcategoria === filtro);
-
-  const btnStyle = (activo) => ({
-    padding: "10px 18px",
-    borderRadius: "20px",
-    border: "1px solid #eee",
-    cursor: "pointer",
-    fontWeight: "500",
-    background: activo ? "var(--accent-soft)" : "#fff",
-    color: activo ? "var(--accent)" : "#333",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+  const productosFiltrados = productos.filter((p) => {
+    if (!categoria) return true;
+    if (categoria && !subcategoria) return p.categoria === categoria;
+    return p.categoria === categoria && p.subcategoria === subcategoria;
   });
 
   return (
-    <div
-      style={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: "20px",
-        minHeight: "100vh",
-      }}
-    >
+    <div style={{ padding: "20px" }}>
       <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
         Productos
       </h1>
 
-      {/* 🔥 MENU TIPO TIENDA */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "10px",
-          flexWrap: "wrap",
-          marginBottom: "25px",
-        }}
-      >
-        <button style={btnStyle(filtro === "todos")} onClick={() => setFiltro("todos")}>
-          Ver todo
-        </button>
-
-        <button style={btnStyle(filtro === "toallones")} onClick={() => setFiltro("toallones")}>
-          Toallones
-        </button>
-
-        <button style={btnStyle(filtro === "toallas")} onClick={() => setFiltro("toallas")}>
-          Toallas
-        </button>
-      </div>
-
-      {/* 🔥 GRID */}
       <div
         style={{
           display: "grid",

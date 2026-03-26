@@ -177,6 +177,71 @@ export const productos = [
     subcategoria: "toallas",
     talles: ["Único"],
     stock: 15
+  },
+
+
+  // 🧦 MEDIAS ANTIDESLIZANTES
+
+  {
+    id: 18,
+    nombre: "Medias Antideslizantes Gris Negra",
+    precio: 5000,
+    imagen: "/medias-gris-negra-M-caña.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10
+  },
+  {
+    id: 19,
+    nombre: "Medias Antideslizantes Gris Rosa",
+    precio: 5000,
+    imagen: "/medias-gris-rosa-M-caña.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10
+  },
+  {
+    id: 20,
+    nombre: "Medias Antideslizantes Lila Celeste",
+    precio: 5000,
+    imagen: "/medias-lila-celeste-soquete.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10,
+    badge: "Top 🔥"
+  },
+  {
+    id: 21,
+    nombre: "Medias Antideslizantes Naranja Lila",
+    precio: 5000,
+    imagen: "/medias-naranja-lila-soquete.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10
+  },
+  {
+    id: 22,
+    nombre: "Medias Antideslizantes Rojo Negro",
+    precio: 5000,
+    imagen: "/medias-rojo-negro-M-caña.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10
+  },
+  {
+    id: 23,
+    nombre: "Medias Antideslizantes Rosa Negras",
+    precio: 5000,
+    imagen: "/medias-rosa-negras-M-caña.png",
+    categoria: "medias",
+    subcategoria: "antideslizantes",
+    talles: ["Único"],
+    stock: 10
   }
 
 ];

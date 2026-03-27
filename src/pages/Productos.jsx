@@ -14,6 +14,14 @@ const Productos = () => {
       return p.categoria === categoria;
     }
 
+    // 👉 TOALLONES Y TOALLAS JUNTOS
+    if (categoria === "productos" && subcategoria === "toallones") {
+      return (
+        p.categoria === "productos" &&
+        (p.subcategoria === "toallones" || p.subcategoria === "toallas")
+      );
+    }
+
     // 👉 CATEGORIA + SUBCATEGORIA
     return (
       p.categoria === categoria &&

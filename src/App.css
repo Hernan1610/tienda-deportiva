@@ -1,3 +1,42 @@
+/* NAVBAR PRINCIPAL */
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  transition: filter 0.18s, transform 0.18s;
+}
+.nav-logo-link:hover .nav-logo-img,
+.nav-logo-link:focus .nav-logo-img {
+  filter: drop-shadow(0 2px 8px #e91e63a8) brightness(1.08);
+  transform: scale(1.07) rotate(-2deg);
+}
+.nav-logo-img {
+  transition: filter 0.18s, transform 0.18s;
+}
+.nav-cart-link {
+  position: relative;
+  transition: color 0.18s;
+}
+.nav-cart-link:hover .nav-cart-icon,
+.nav-cart-link:focus .nav-cart-icon {
+  color: #e91e63;
+  transform: scale(1.13) rotate(8deg);
+  text-shadow: 0 2px 8px #e91e63a8;
+}
+.nav-cart-icon {
+  transition: color 0.18s, transform 0.18s, text-shadow 0.18s;
+}
+/* Hover y transición para los ítems del menú hamburguesa */
+.menu-item-link {
+  transition: background 0.18s, color 0.18s, transform 0.18s, box-shadow 0.22s cubic-bezier(.4,2,.6,1);
+  will-change: background, color, transform, box-shadow;
+}
+.menu-item-link:hover, .menu-item-link:focus {
+  background: #f8bbd0 !important;
+  color: #ad1457 !important;
+  transform: scale(1.055);
+  box-shadow: 0 4px 18px -6px #e91e63a8, 0 1.5px 0 #fff3;
+  text-decoration: none;
+}
 /* 🔥 VARIABLES DE MARCA (BALANCE) */
 :root {
   --bg: #faa4d3;

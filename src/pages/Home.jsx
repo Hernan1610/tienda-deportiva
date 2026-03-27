@@ -49,17 +49,6 @@ const Home = () => {
       <div style={divider} />
 
       {/* CATEGORÍAS */}
-      <section style={sectionStyle}>
-        <h2 style={sectionTitle}>Explorá BALANCE</h2>
-
-        <div style={gridStyle}>
-          {["Todo", "Ropa", "Toallas", "Medias"].map((cat) => (
-            <Link key={cat} to="/productos" style={cardStyle}>
-              {cat}
-            </Link>
-          ))}
-        </div>
-      </section>
 
       {/* DESTACADOS */}
       <section style={sectionStyle}>

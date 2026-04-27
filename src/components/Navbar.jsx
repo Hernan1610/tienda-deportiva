@@ -1,18 +1,5 @@
-            <div style={{
-              textAlign: "center",
-              marginBottom: 12,
-              fontSize: 18,
-              color: "#1976d2",
-              fontWeight: 500,
-              fontFamily: 'Segoe UI, Arial, sans-serif',
-              letterSpacing: 0.2,
-              opacity: 0.92
-            }}>
-              ¡Bienvenid@ a Balance!
-              <div style={{ fontSize: 13, color: '#555', fontWeight: 400, marginTop: 2 }}>
-                Descubrí productos para tu estilo.
-              </div>
-            </div>
+// ...existing code...
+import React from "react";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -20,20 +7,41 @@ import CartContext from "../context/CartContext";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
-    // Helper para saber si un link está activo
-    const isActive = (to) => location.pathname === to;
+  // Helper para saber si un link está activo
+  const isActive = (to) => location.pathname === to;
   const { carrito } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [productosOpen, setProductosOpen] = useState(false);
   const [mediasOpen, setMediasOpen] = useState(false);
+  const [botellasOpen, setBotellasOpen] = useState(false);
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
 
   // Detecta si está en cualquier ruta de productos
   const isProductosActive = location.pathname.startsWith("/productos");
 
+  // Efecto para sombra al hacer scroll
+  // Se agrega/remueve sombra según scrollY
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 4);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Estilo dinámico para el nav
+  const navDynamicStyle = {
+    ...navStyle,
+    boxShadow: scrolled ? "0 4px 18px -6px #e91e63a8, 0 1.5px 0 #fff3" : "none",
+    background: "#fff",
+    zIndex: 2001,
+    transition: "background 0.25s, box-shadow 0.25s"
+  };
+
   return (
     <>
-      <nav style={navStyle}>
+      <nav style={navDynamicStyle}>
         <button style={menuBtn} onClick={() => setMenuOpen(true)} aria-label="Abrir menú">
           <span role="img" aria-label="Menú">☰</span>
         </button>
@@ -57,262 +65,354 @@ const Navbar = () => {
           )}
         </Link>
       </nav>
-      {/* Overlay y menú hamburguesa */}
       {menuOpen && (
-        <div style={overlay} onClick={() => setMenuOpen(false)}>
-          <div style={menu} onClick={e => e.stopPropagation()}>
-            <div style={{
-              textAlign: "center",
-              marginBottom: 12,
-              fontSize: 18,
-              color: "#1976d2",
-              fontWeight: 500,
-              fontFamily: 'Segoe UI, Arial, sans-serif',
-              letterSpacing: 0.2,
-              opacity: 0.92
-            }}>
-              ¡Bienvenid@ a Balance!
-              <div style={{ fontSize: 13, color: '#555', fontWeight: 400, marginTop: 2 }}>
-                Descubrí productos para tu estilo.
-              </div>
+        <div style={overlay} onClick={() => setMenuOpen(false)} role="presentation">
+          <nav style={{
+            width: 320,
+            height: '100vh',
+            background: '#f4f4f4',
+            boxShadow: '2px 0 32px 0 rgba(0,0,0,0.10)',
+            border: 'none',
+            padding: 0,
+            paddingTop: 48,
+            display: 'block',
+            position: 'relative',
+            overflowY: 'auto'
+          }} onClick={e => e.stopPropagation()} aria-label="Menú principal de navegación" role="navigation">
+            <button onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" style={{
+              position: 'absolute',
+              top: 18,
+              right: 18,
+              background: 'none',
+              border: 'none',
+              fontSize: 32,
+              color: '#222',
+              cursor: 'pointer',
+              zIndex: 10
+            }}>×</button>
+            <div style={{ height: 48 }} />
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                ...item,
+                fontWeight: 700,
+                color: location.pathname === '/' ? '#181818' : '#181818',
+                background: location.pathname === '/' ? '#ececec' : 'transparent',
+                borderRadius: 8,
+                borderLeft: 'none',
+                padding: '18px 28px',
+                fontSize: 18,
+                borderBottom: '1px solid #e0e0e0',
+                letterSpacing: 0.1,
+                textAlign: 'left',
+                transition: 'background 0.18s, color 0.18s',
+                boxShadow: location.pathname === '/' ? '0 1px 6px 0 #e0e0e0' : 'none'
+              }}
+              className="menu-item-link"
+            >
+              Inicio
+            </Link>
+            <div
+              style={{
+                ...item,
+                fontWeight: 700,
+                color: location.pathname.startsWith('/productos') ? '#181818' : '#181818',
+                background: location.pathname.startsWith('/productos') ? '#ececec' : 'transparent',
+                borderRadius: 8,
+                borderLeft: 'none',
+                padding: '18px 28px',
+                fontSize: 18,
+                borderBottom: '1px solid #e0e0e0',
+                letterSpacing: 0.1,
+                textAlign: 'left',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                transition: 'background 0.18s, color 0.18s',
+                userSelect: 'none',
+                boxShadow: location.pathname.startsWith('/productos') ? '0 1px 6px 0 #e0e0e0' : 'none'
+              }}
+              onClick={() => setProductosOpen(!productosOpen)}
+            >
+              <span style={{ flex: 1 }}>Productos</span>
+              <span style={{ fontSize: 22, marginLeft: 8, transition: 'transform 0.2s', transform: productosOpen ? 'rotate(90deg)' : 'none', fontWeight: 400, fontFamily: 'inherit', lineHeight: 1 }}>
+                {/* Flecha fina y delicada */}
+                ❯
+              </span>
             </div>
-            <div style={{
-              textAlign: "center",
-              marginBottom: 12,
-              fontSize: 18,
-              color: "#1976d2",
-              fontWeight: 500,
-              fontFamily: 'Segoe UI, Arial, sans-serif',
-              letterSpacing: 0.2,
-              opacity: 0.92
-            }}>
-              ¡Bienvenid@ a Balance!
-              <div style={{ fontSize: 13, color: '#555', fontWeight: 400, marginTop: 2 }}>
-                Descubrí productos para tu estilo.
-              </div>
-            </div>
-            {/* Línea divisoria superior */}
-            <div style={{
-              borderBottom: '1px solid #e3e3e3',
-              margin: '0 0 18px 0',
-              width: '100%'
-            }} />
-            {/* PRODUCTOS */}
-            <div>
-              <div
-                style={{
-                  ...menuTitle,
-                  fontWeight: isProductosActive ? "bold" : "normal",
-                  color: isProductosActive ? "#1976d2" : "#333",
-                  display: "flex",
-                  alignItems: "center",
-                  cursor: "pointer"
-                }}
-                onClick={() => setProductosOpen(!productosOpen)}
-              >
-                <span>Productos</span>
-                <span
+            {productosOpen && (
+              <div style={{ background: '#ededed', padding: '0 0 0 18px' }}>
+                <Link to="/productos" onClick={() => setMenuOpen(false)}
                   style={{
-                    display: "inline-block",
-                    marginLeft: 6,
-                    transition: "transform 0.22s cubic-bezier(.4,2,.6,1)",
-                    transform: productosOpen ? "rotate(90deg)" : "rotate(0deg)"
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos' ? '#181818' : '#222',
+                    background: location.pathname === '/productos' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
                   }}
-                >
-                  ▶
-                </span>
+                >Ver todos</Link>
+                <Link to="/productos/productos/toallones" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/productos/toallones' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/productos/toallones' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/productos/toallones' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Toallones y toallas</Link>
+                <Link to="/productos/medias/antideslizantes" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/medias/antideslizantes' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/medias/antideslizantes' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/medias/antideslizantes' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Medias antideslizantes</Link>
+                <Link to="/productos/medias/amanecer" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/medias/amanecer' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/medias/amanecer' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/medias/amanecer' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Medias amanecer</Link>
+                <Link to="/productos/botellas" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/botellas' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/botellas' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/botellas' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Botellas</Link>
+                <Link to="/productos/tops" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/tops' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/tops' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/tops' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Tops</Link>
+                <Link to="/productos/musculosas" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/musculosas' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/musculosas' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/musculosas' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Musculosas</Link>
+                <Link to="/productos/remeras" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/remeras' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/remeras' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/remeras' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Remeras M/cortas</Link>
+                <Link to="/productos/buzo-plush" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/buzo-plush' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/buzo-plush' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/buzo-plush' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Buzos plush</Link>
+                <Link to="/productos/buzo-crop" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/buzo-crop' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/buzo-crop' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/buzo-crop' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Buzos crops</Link>
+                <Link to="/productos/buzo-polar" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/buzo-polar' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/buzo-polar' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/buzo-polar' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Buzo polar</Link>
+                <Link to="/productos/maxi-buzo" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/maxi-buzo' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/maxi-buzo' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/maxi-buzo' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Maxi buzo</Link>
+                <Link to="/productos/buzo-cierre" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/buzo-cierre' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/buzo-cierre' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/buzo-cierre' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Buzo con cierre</Link>
+                <Link to="/productos/productos/calza-biker" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/productos/calza-biker' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/productos/calza-biker' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/productos/calza-biker' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Calzas biker</Link>
+                <Link to="/productos/productos/calza-capri" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/productos/calza-capri' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/productos/calza-capri' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/productos/calza-capri' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Calzas capri</Link>
+                <Link to="/productos/productos/calza-larga" onClick={() => setMenuOpen(false)}
+                  style={{
+                    ...item,
+                    fontWeight: 500,
+                    color: location.pathname === '/productos/productos/calza-larga' ? '#181818' : '#222',
+                    background: location.pathname === '/productos/productos/calza-larga' ? '#e0e0e0' : 'transparent',
+                    borderRadius: 6,
+                    padding: '16px 28px',
+                    fontSize: 17,
+                    borderBottom: '1px solid #e0e0e0',
+                    boxShadow: location.pathname === '/productos/productos/calza-larga' ? '0 1px 6px 0 #e0e0e0' : 'none',
+                    transition: 'background 0.18s, color 0.18s'
+                  }}
+                >Calzas largas</Link>
               </div>
-              {productosOpen && (
-                <div style={submenu}>
-                  <Link
-                    to="/productos"
-                    onClick={() => setMenuOpen(false)}
-                    style={{
-                      ...item,
-                      background: isActive("/productos") ? "#e3f0fa" : "transparent",
-                      borderRadius: isActive("/productos") ? "6px" : undefined,
-                      fontWeight: isActive("/productos") ? "bold" : undefined,
-                      borderLeft: isActive("/productos") ? "4px solid #1976d2" : "4px solid transparent",
-                      paddingLeft: isActive("/productos") ? 12 : 16
-                    }}
-                    className="menu-item-link"
-                  >
-                    Ver todos
-                  </Link>
-                  <Link
-                    to="/productos/productos/toallones"
-                    onClick={() => setMenuOpen(false)}
-                    style={{
-                      ...item,
-                      background: isActive("/productos/productos/toallones") ? "#e3f0fa" : "transparent",
-                      borderRadius: isActive("/productos/productos/toallones") ? "6px" : undefined,
-                      fontWeight: isActive("/productos/productos/toallones") ? "bold" : undefined,
-                      borderLeft: isActive("/productos/productos/toallones") ? "4px solid #1976d2" : "4px solid transparent",
-                      paddingLeft: isActive("/productos/productos/toallones") ? 12 : 16
-                    }}
-                    className="menu-item-link"
-                  >
-                    Toallones y toallas
-                  </Link>
-                  {/* 🧦 MEDIAS AGRUPADAS */}
-                  <div>
-                    <a
-                      style={{
-                        ...item,
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        padding: "8px 0",
-                        fontSize: "14px",
-                        marginBottom: "0px",
-                        background: mediasOpen ? "#e3f0fa" : "transparent",
-                        borderRadius: mediasOpen ? "6px" : undefined,
-                        fontWeight: mediasOpen ? "bold" : undefined,
-                        borderLeft: mediasOpen ? "4px solid #1976d2" : "4px solid transparent",
-                        paddingLeft: mediasOpen ? 12 : 16,
-                        color: mediasOpen ? "#1976d2" : "#333",
-                        transition: "background 0.18s, color 0.18s, border-left 0.18s, padding 0.18s"
-                      }}
-                      className="menu-item-link"
-                      tabIndex={0}
-                      onClick={() => setMediasOpen(!mediasOpen)}
-                      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setMediasOpen(!mediasOpen); }}
-                    >
-                      <span>Medias</span>
-                      <span
-                        style={{
-                          display: "inline-block",
-                          marginLeft: 6,
-                          transition: "transform 0.22s cubic-bezier(.4,2,.6,1)",
-                          transform: mediasOpen ? "rotate(90deg)" : "rotate(0deg)"
-                        }}
-                      >
-                        ▶
-                      </span>
-                    </a>
-                    {mediasOpen && (
-                      <div style={submenu}>
-                        <Link
-                          to="/productos/medias/antideslizantes"
-                          onClick={() => setMenuOpen(false)}
-                          style={{
-                            ...item,
-                            background: isActive("/productos/medias/antideslizantes") ? "#e3f0fa" : "transparent",
-                            borderRadius: isActive("/productos/medias/antideslizantes") ? "6px" : undefined,
-                            fontWeight: isActive("/productos/medias/antideslizantes") ? "bold" : undefined,
-                            borderLeft: isActive("/productos/medias/antideslizantes") ? "4px solid #1976d2" : "4px solid transparent",
-                            paddingLeft: isActive("/productos/medias/antideslizantes") ? 12 : 16
-                          }}
-                          className="menu-item-link"
-                        >
-                          Antideslizantes
-                        </Link>
-                        <Link
-                          to="/productos/medias/amanecer"
-                          onClick={() => setMenuOpen(false)}
-                          style={{
-                            ...item,
-                            background: isActive("/productos/medias/amanecer") ? "#e3f0fa" : "transparent",
-                            borderRadius: isActive("/productos/medias/amanecer") ? "6px" : undefined,
-                            fontWeight: isActive("/productos/medias/amanecer") ? "bold" : undefined,
-                            borderLeft: isActive("/productos/medias/amanecer") ? "4px solid #1976d2" : "4px solid transparent",
-                            paddingLeft: isActive("/productos/medias/amanecer") ? 12 : 16
-                          }}
-                          className="menu-item-link"
-                        >
-                          Amanecer
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                  {/* OTRAS CATEGORÍAS */}
-                  <Link to="/productos/botellas" style={{
-                    ...item,
-                    background: isActive("/productos/botellas") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/botellas") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/botellas") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/botellas") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Botellas</Link>
-                  <Link to="/productos/tops" style={{
-                    ...item,
-                    background: isActive("/productos/tops") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/tops") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/tops") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/tops") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Tops</Link>
-                  <Link to="/productos/musculosas" style={{
-                    ...item,
-                    background: isActive("/productos/musculosas") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/musculosas") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/musculosas") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/musculosas") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Musculosas</Link>
-                  <Link to="/productos/remeras" style={{
-                    ...item,
-                    background: isActive("/productos/remeras") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/remeras") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/remeras") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/remeras") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Remeras M/cortas</Link>
-                  <Link to="/productos/buzo-plush" style={{
-                    ...item,
-                    background: isActive("/productos/buzo-plush") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/buzo-plush") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/buzo-plush") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/buzo-plush") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Buzos plush</Link>
-                  <Link to="/productos/buzo-crop" style={{
-                    ...item,
-                    background: isActive("/productos/buzo-crop") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/buzo-crop") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/buzo-crop") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/buzo-crop") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Buzos crops</Link>
-                  <Link to="/productos/buzo-polar" style={{
-                    ...item,
-                    background: isActive("/productos/buzo-polar") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/buzo-polar") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/buzo-polar") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/buzo-polar") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Buzo polar</Link>
-                  <Link to="/productos/maxi-buzo" style={{
-                    ...item,
-                    background: isActive("/productos/maxi-buzo") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/maxi-buzo") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/maxi-buzo") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/maxi-buzo") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Maxi buzo</Link>
-                  <Link to="/productos/buzo-cierre" style={{
-                    ...item,
-                    background: isActive("/productos/buzo-cierre") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/buzo-cierre") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/buzo-cierre") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/buzo-cierre") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Buzo con cierre</Link>
-                  <Link to="/productos/calza-biker" style={{
-                    ...item,
-                    background: isActive("/productos/calza-biker") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/calza-biker") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/calza-biker") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/calza-biker") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Calzas biker</Link>
-                  <Link to="/productos/calza-capri" style={{
-                    ...item,
-                    background: isActive("/productos/calza-capri") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/calza-capri") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/calza-capri") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/calza-capri") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Calzas capri</Link>
-                  <Link to="/productos/calza-larga" style={{
-                    ...item,
-                    background: isActive("/productos/calza-larga") ? "#e3f0fa" : "transparent",
-                    fontWeight: isActive("/productos/calza-larga") ? "bold" : undefined,
-                    borderLeft: isActive("/productos/calza-larga") ? "4px solid #1976d2" : "4px solid transparent",
-                    paddingLeft: isActive("/productos/calza-larga") ? 12 : 16
-                  }} className="menu-item-link" onClick={() => setMenuOpen(false)}>Calzas largas</Link>
-                </div>
-              )}
-            </div>
+            )}
+            <Link
+              to="/productos/ofertas"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                ...item,
+                fontWeight: 700,
+                color: location.pathname === '/productos/ofertas' ? '#181818' : '#181818',
+                background: location.pathname === '/productos/ofertas' ? '#ececec' : 'transparent',
+                borderRadius: 8,
+                borderLeft: 'none',
+                padding: '18px 28px',
+                fontSize: 18,
+                borderBottom: '1px solid #e0e0e0',
+                letterSpacing: 0.1,
+                textAlign: 'left',
+                transition: 'background 0.18s, color 0.18s',
+                boxShadow: location.pathname === '/productos/ofertas' ? '0 1px 6px 0 #e0e0e0' : 'none'
+              }}
+              className="menu-item-link"
+            >
+              Ofertas
+            </Link>
+            <Link
+              to="/quienes-somos"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                ...item,
+                fontWeight: 700,
+                color: location.pathname === '/quienes-somos' ? '#181818' : '#181818',
+                background: location.pathname === '/quienes-somos' ? '#ececec' : 'transparent',
+                borderRadius: 8,
+                borderLeft: 'none',
+                padding: '18px 28px',
+                fontSize: 18,
+                borderBottom: '1px solid #e0e0e0',
+                letterSpacing: 0.1,
+                textAlign: 'left',
+                transition: 'background 0.18s, color 0.18s',
+                boxShadow: location.pathname === '/quienes-somos' ? '0 1px 6px 0 #e0e0e0' : 'none'
+              }}
+              className="menu-item-link"
+            >
+              Quiénes somos
+            </Link>
             <div style={{ flex: 1 }} />
             <div style={{
               textAlign: 'center',
@@ -323,7 +423,7 @@ const Navbar = () => {
             }}>
               © {new Date().getFullYear()} Balance
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </>
@@ -381,7 +481,7 @@ const menu = {
   width: "300px",
   height: "100%",
   background: "linear-gradient(135deg, #fff0f6 0%, #fce4ec 100%)",
-  padding: "20px",
+  padding: "8px 20px 20px 20px",
   overflowY: "auto",
   boxShadow: "2px 0 16px 0 rgba(0,0,0,0.18)",
   borderTopRightRadius: "22px"

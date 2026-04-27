@@ -1,5 +1,15 @@
 export const productos = [
   {
+    id: 1004,
+    nombre: "Buzo Polar Azul",
+    precio: 24000,
+    imagen: "/buzo-polar-azul.png",
+    categoria: "buzo-polar",
+    subcategoria: "polar",
+    talles: ["Único"],
+    stock: 1
+  },
+  {
     id: 1001,
     nombre: "Buzo Boxy Lila",
     precio: 22000,
